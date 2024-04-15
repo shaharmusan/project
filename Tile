@@ -1,0 +1,117 @@
+package shaharproject;
+
+import java.util.Objects;
+import java.util.Random;
+
+public class Tile 
+{
+    private final char letter;
+    private final int score;
+
+	    
+
+	@Override
+	public int hashCode() 
+	{
+		return Objects.hash(letter, score);
+	}
+
+	@Override
+	public boolean equals(Object obj) 
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tile other = (Tile) obj;
+		return letter == other.letter && score == other.score;
+	}   
+	// קונסטרקטור לאתחול של שדות המחלקה
+    public Tile(char letter, int score) 
+    {
+		this.letter = letter;
+	    this.score = score;
+		   
+    }
+	
+	
+    public static class Bag	
+    {
+    	 private static Bag bag=null;
+		 static int total_cells=26;
+		 static int[] numbers= new int[total_cells];
+		 private Bag()
+		 {
+		    numbers[0]=9;
+		    numbers[1]=2;
+		    numbers[2]=2;
+		    numbers[3]=4;
+		    numbers[4]=12;
+		    numbers[5]=2;
+		    numbers[6]=3;
+		    numbers[7]=2;
+		    numbers[8]=9;
+		    numbers[9]=1;
+		    numbers[10]=1;
+		    numbers[11]=4;
+		    numbers[12]=2;
+		    numbers[13]=6;
+		    numbers[14]=8;
+		    numbers[15]=2;
+		    numbers[16]=1;
+		    numbers[17]=6;
+		    numbers[18]=4;
+		    numbers[19]=6;
+	        numbers[20]=4;
+	        numbers[21]=2;
+		    numbers[22]=2;
+           	numbers[23]=1;
+		    numbers[24]=2;
+	     	numbers[25]=1;
+		 }
+		
+	 public static Tile getRand() 
+	 {
+		 Random rand=new Random();
+		 int tile_cells=rand.nextInt(total_cells);
+		 if(numbers[tile_cells]==0)
+		 {
+			 return null;
+		 }
+		 numbers[tile_cells]--;
+		 char letter=(char)('A' + tile_cells);
+		 return new Tile(letter, 1);
+	 }
+	 
+	 public Tile getTile(char tile_char)
+	 {
+		 int tile_cells=tile_char-'A';
+		 if(numbers[tile_cells]==0)
+		 {
+			 return null;
+		 }
+		 else
+		 {
+			 numbers[tile_cells]--;
+			 
+		 }
+		 
+	 }
+	 public Tile put(char tile_char)
+	 {
+		 numbers=numbers[total_cells]+tile_char;
+	 }
+	 
+}
+	 
+	
+	
+	
+	
+	 
+	 
+
+}
+
